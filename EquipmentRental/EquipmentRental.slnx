@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../EquipmentRental.Application/EquipmentRental.Application.csproj" />
+  <Project Path="../EquipmentRental.Domain/EquipmentRental.Domain.csproj" />
+  <Project Path="../EquipmentRental.Infrastructure/EquipmentRental.Infrastructure.csproj" />
+  <Project Path="EquipmentRental.Api.csproj" />
+</Solution>
