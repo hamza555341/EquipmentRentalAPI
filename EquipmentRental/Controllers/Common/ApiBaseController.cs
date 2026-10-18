@@ -85,6 +85,7 @@ namespace EquipmentRental.Api.Controllers.Common
             ErrorType.Validation => StatusCodes.Status400BadRequest,
             ErrorType.InValidCerdentials => StatusCodes.Status401Unauthorized,
             ErrorType.Failure => StatusCodes.Status500InternalServerError,
+            ErrorType.Conflict => StatusCodes.Status409Conflict,
             _ => StatusCodes.Status500InternalServerError,
 
 

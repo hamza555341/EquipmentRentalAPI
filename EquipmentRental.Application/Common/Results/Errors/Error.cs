@@ -46,6 +46,11 @@ namespace EquipmentRental.Application.Common.Results.Errors
             return new Error(code, description, ErrorType.InValidCerdentials);
         }
 
+        public static Error Conflict(string code = "General.Conflict", string description = "A conflict has occurred")
+        {
+            return new Error(code, description, ErrorType.Conflict);
+        }
+
 
 
 
