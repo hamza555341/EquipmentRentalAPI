@@ -92,7 +92,7 @@ namespace EquipmentRental.Api.Controllers.Common
         };
 
         protected string GetEmailFromToken() => User.FindFirstValue(ClaimTypes.Email)!;
-
+        protected string GetUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
     }
 }

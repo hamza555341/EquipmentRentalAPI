@@ -1,3 +1,4 @@
+using EquipmentRental.Api.Helper;
 using EquipmentRental.Application;
 using EquipmentRental.Application.Common.Behaviors;
 using EquipmentRental.Application.Common.Contracts;
@@ -13,11 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
 builder.Services.AddDbContext<ApplicationDbContext>(Options =>
 {
     Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+// إعدادات الـ Swagger الأساسية (بدون JWT Security)
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddIdentity<IdentityUser, IdentityRole>()
@@ -26,13 +32,17 @@ builder.Services
 
 
 
-builder.Services.AddMediatR(cfg => {
+builder.Services.AddMediatR(cfg =>
+{
     cfg.RegisterServicesFromAssembly(typeof(IApplicationAssemblyMarker).Assembly);
 });
 
 
 builder.Services.AddScoped<IDbIntializer, SeedData>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 // Register FluentValidation validators from the Application assembly
 builder.Services.AddValidatorsFromAssembly(typeof(IApplicationAssemblyMarker).Assembly);
@@ -67,9 +77,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();    
+app.UseAuthentication();
 app.UseAuthorization();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.RoutePrefix = string.Empty; // دي بتخلي الـ Swagger يفتح مباشرة على الصفحة الرئيسية للمشروع!
+        options.DisplayRequestDuration();
+        options.EnableFilter();
+    });
+}
 
 app.MapControllers();
 
 app.Run();
+
+
+
+
+
+
