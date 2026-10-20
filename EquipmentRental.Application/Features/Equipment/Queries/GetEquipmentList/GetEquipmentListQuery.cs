@@ -7,7 +7,7 @@ using System.Text;
 
 namespace EquipmentRental.Application.Features.Equipment.Queries.GetEquipmentList
 {
-    public sealed record GetEquipmentListQyery :IRequest<Result<IReadOnlyList<EquipmentListItemResponse>>>
+    public sealed record GetEquipmentListQuery :IRequest<Result<IReadOnlyList<EquipmentListItemResponse>>>
     {
     }
 }

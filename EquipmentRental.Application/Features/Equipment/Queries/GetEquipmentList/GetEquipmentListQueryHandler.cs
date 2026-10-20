@@ -8,7 +8,7 @@ using System.Text;
 
 namespace EquipmentRental.Application.Features.Equipment.Queries.GetEquipmentList
 {
-    public class GetEquipmentListQueryHandler : IRequestHandler<GetEquipmentListQyery, Result<IReadOnlyList<EquipmentListItemResponse>>>
+    public class GetEquipmentListQueryHandler : IRequestHandler<GetEquipmentListQuery, Result<IReadOnlyList<EquipmentListItemResponse>>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -17,7 +17,7 @@ namespace EquipmentRental.Application.Features.Equipment.Queries.GetEquipmentLis
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<IReadOnlyList<EquipmentListItemResponse>>> Handle(GetEquipmentListQyery request, CancellationToken cancellationToken)
+        public async Task<Result<IReadOnlyList<EquipmentListItemResponse>>> Handle(GetEquipmentListQuery request, CancellationToken cancellationToken)
         {
            var EquipRepo= _unitOfWork.Repository<EquipmentRental.Domain.Entites.Equipment>();
            var LoanRepo = _unitOfWork.Repository<EquipmentRental.Domain.Entites.Loan>();

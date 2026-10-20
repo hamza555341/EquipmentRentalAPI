@@ -2,8 +2,8 @@
 {
     public enum EquipmentStatus
     {
-        active,
-        Maintenance,
+        active=0,
+        Maintenance=1,
 
     }
 }
