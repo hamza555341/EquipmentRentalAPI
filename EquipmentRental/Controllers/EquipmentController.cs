@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EquipmentRental.Api.Controllers
 {
 
-   
+    [Authorize]
     public class EquipmentController : ApiBaseController
     {
         private readonly ISender _sender;
@@ -45,9 +45,9 @@ namespace EquipmentRental.Api.Controllers
         [HttpPut("{id:int}/status")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateStatus(
-    int id,
-    [FromBody] UpdateEquipmentStatusCommand command,
-    CancellationToken cancellationToken)
+               int id,
+               [FromBody] UpdateEquipmentStatusCommand command,
+                                       CancellationToken cancellationToken)
         {
             if (id != command.EquipmentId)
             {
