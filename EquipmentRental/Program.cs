@@ -163,12 +163,12 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var initializer = scope.ServiceProvider
-        .GetRequiredService<IDbIntializer>();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await db.Database.MigrateAsync();  
 
+    var initializer = scope.ServiceProvider.GetRequiredService<IDbIntializer>();
     await initializer.InitializeDataAsync();
 }
-
 
 
 // Configure the HTTP request pipeline.
@@ -197,6 +197,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 
 
 
