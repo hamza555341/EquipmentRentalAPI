@@ -1,4 +1,10 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.dockerignore" />
+    <File Path="../.gitignore" />
+    <File Path="../docker-compose.yml" />
+    <File Path="../Dockerfile" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="../EquipmentRental.Application/EquipmentRental.Application.csproj" />
     <Project Path="../EquipmentRental.Domain/EquipmentRental.Domain.csproj" />
