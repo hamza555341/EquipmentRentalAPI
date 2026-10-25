@@ -11,7 +11,6 @@ public class UpdateEquipmentStatusCommandHandlerTests
 {
     private readonly FakeUnitOfWork _uow = new();
 
-    // ملحوظة: لو الـ Command عندك شكله مختلف عن (EquipmentId, Status) عدّل الـ constructor هنا بس.
     [Fact]
     public async Task Handle_ShouldReturnNotFound_WhenEquipmentDoesNotExist()
     {
@@ -47,8 +46,7 @@ public class UpdateEquipmentStatusCommandHandlerTests
         Assert.Equal(1, _uow.SaveChangesCallCount);
     }
 
-    // الاختبار ده متقفّل (Skip) لأن الـ Handler عندك مفيهوش القاعدة دي دلوقتي.
-    // لو ضفت الفحص (ممنوع Maintenance وهي مستعارة) شيل الـ Skip وهيشتغل.
+ 
     [Fact(Skip = "Handler doesn't enforce this rule yet - add the active-loan check then remove Skip")]
     public async Task Handle_ShouldReturnConflict_WhenMovingBorrowedEquipmentToMaintenance()
     {

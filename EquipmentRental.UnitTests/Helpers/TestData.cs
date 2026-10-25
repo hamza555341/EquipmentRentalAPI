@@ -35,7 +35,6 @@ public static class TestData
             ReturnedAt = returnedAt
         };
 
-    // Mock بسيط لـ ICurrentUserService: بنحدد مين المستخدم الحالي وهو Admin ولا لأ
     public static Mock<ICurrentUserService> CurrentUser(string? userId, bool isAdmin = false)
     {
         var mock = new Mock<ICurrentUserService>();
@@ -45,6 +44,5 @@ public static class TestData
         return mock;
     }
 
-    // اختصار: أول Error في الـ Result
     public static Error FirstError(this Result result) => result.Errors[0];
 }

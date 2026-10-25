@@ -13,7 +13,6 @@ public class GetLoansQueryHandlerTests
     private GetLoansQueryHandler CreateHandler(string? userId, bool isAdmin = false)
         => new(_uow, TestData.CurrentUser(userId, isAdmin).Object);
 
-    // بيجهّز: loan لـ user-1 ، وloan لـ user-1 تاني (اترجع)، وloan لـ user-2
     private void SeedThreeLoans()
     {
         var e1 = _uow.Set<EquipmentEntity>().Seed(TestData.NewEquipment("Camera"));
@@ -87,7 +86,7 @@ public class GetLoansQueryHandlerTests
         // Act
         var result = await handler.Handle(new GetLoansQuery(), CancellationToken.None);
 
-        // Assert: الأحدث الأول
+        // Assert
         var dates = result.Value.Select(l => l.BorrowedAt).ToList();
         Assert.Equal(dates.OrderByDescending(d => d).ToList(), dates);
     }
@@ -95,7 +94,7 @@ public class GetLoansQueryHandlerTests
     [Fact]
     public async Task Handle_ShouldNotMarkReturnedLoanAsOverdue()
     {
-        // Arrange: القرض الثاني اتأخر بس اترجع، فمينفعش يتعلّم Overdue
+        // Arrange
         SeedThreeLoans();
         var handler = CreateHandler("user-1");
 

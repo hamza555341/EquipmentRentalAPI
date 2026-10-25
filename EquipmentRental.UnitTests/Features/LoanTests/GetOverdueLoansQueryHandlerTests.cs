@@ -32,15 +32,12 @@ public class GetOverdueLoansQueryHandlerTests
         var laptop = _uow.Set<EquipmentEntity>().Seed(TestData.NewEquipment("Laptop"));
         var now = DateTimeOffset.UtcNow;
 
-        // متأخر فعلًا (لسه مترجعش وتاريخه فات)
         var overdue = _uow.Set<LoanEntity>().Seed(
             TestData.NewLoan(camera.Id, "u1", dueDate: now.AddDays(-2)));
 
-        // اترجع متأخر: مش المفروض يظهر (القاعدة: المتأخر = لم يُرجَع)
         _uow.Set<LoanEntity>().Seed(TestData.NewLoan(
             drone.Id, "u2", dueDate: now.AddDays(-10), returnedAt: now.AddDays(-9)));
 
-        // لسه معاده مجاش
         _uow.Set<LoanEntity>().Seed(
             TestData.NewLoan(laptop.Id, "u3", dueDate: now.AddDays(5)));
 
@@ -75,7 +72,7 @@ public class GetOverdueLoansQueryHandlerTests
         // Act
         var result = await handler.Handle(new GetOverdueLoansQuery(), CancellationToken.None);
 
-        // Assert: الأقدم استحقاقًا الأول
+        // Assert
         Assert.Equal(
             new[] { longOverdue.Id, recentlyOverdue.Id },
             result.Value.Select(x => x.Id).ToArray());

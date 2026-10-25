@@ -38,7 +38,7 @@ public class GetEquipmentByIdQueryHandlerTests
         // Assert
         Assert.True(result.IsSuccess);
         Assert.Equal("Camera", result.Value.Name);
-        Assert.True(result.Value.IsAvaliable);   // typo عندك في الاسم، عدّله لو صلّحته
+        Assert.True(result.Value.IsAvaliable);   
     }
 
     [Fact]

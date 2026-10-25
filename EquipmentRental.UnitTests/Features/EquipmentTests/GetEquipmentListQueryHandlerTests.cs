@@ -34,11 +34,10 @@ public class GetEquipmentListQueryHandlerTests
             .Seed(TestData.NewEquipment("Broken", EquipmentStatus.Maintenance));
         var returnedBefore = _uow.Set<EquipmentEntity>().Seed(TestData.NewEquipment("ReturnedBefore"));
 
-        // Borrowed: عليه Loan نشط
         _uow.Set<LoanEntity>().Seed(
             TestData.NewLoan(borrowed.Id, "u1", DateTimeOffset.UtcNow.AddDays(2)));
 
-        // ReturnedBefore: كان مستعار واترجع، يعني متاح تاني
+     
         _uow.Set<LoanEntity>().Seed(TestData.NewLoan(
             returnedBefore.Id, "u2",
             dueDate: DateTimeOffset.UtcNow.AddDays(-2),
@@ -51,9 +50,8 @@ public class GetEquipmentListQueryHandlerTests
 
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.Equal(4, result.Value.Count);   // بيرجّع كل المعدات حتى الـ Maintenance
+        Assert.Equal(4, result.Value.Count);   
 
-        // الخاصية اسمها IsAvaliable عندك (فيها typo). لو صلّحتها غيّر الاسم هنا.
         Assert.True(result.Value.Single(x => x.Id == free.Id).IsAvaliable);
         Assert.False(result.Value.Single(x => x.Id == borrowed.Id).IsAvaliable);
         Assert.False(result.Value.Single(x => x.Id == inMaintenance.Id).IsAvaliable);

@@ -62,7 +62,7 @@ public class ReturnLoanCommandHandlerTests
         // Assert
         Assert.True(result.IsFailure);
         Assert.Equal(ErrorType.Forbidden, result.FirstError().Type);
-        Assert.Null(loan.ReturnedAt);                 // القرض لسه زي ما هو
+        Assert.Null(loan.ReturnedAt);                
         Assert.Equal(0, _uow.SaveChangesCallCount);
     }
 

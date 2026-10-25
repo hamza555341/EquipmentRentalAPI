@@ -109,7 +109,7 @@ public class BorrowEquipmentCommandHandlerTests
     [Fact]
     public async Task Handle_ShouldSucceed_WhenPreviousLoanWasAlreadyReturned()
     {
-        // Arrange: الجهاز اتستعار قبل كده واترجع، فالمفروض يتستعار تاني
+        // Arrange
         var equipment = _uow.Set<EquipmentEntity>().Seed(TestData.NewEquipment());
         _uow.Set<LoanEntity>().Seed(TestData.NewLoan(
             equipment.Id, "old-user",
@@ -145,7 +145,7 @@ public class BorrowEquipmentCommandHandlerTests
         Assert.True(result.IsSuccess);
 
         var loan = Assert.Single(_uow.Set<LoanEntity>().Items);
-        Assert.Equal("user-1", loan.UserId);          // الـ UserId جاي من الـ Token مش من العميل
+        Assert.Equal("user-1", loan.UserId);         
         Assert.Equal(equipment.Id, loan.EquipmentId);
         Assert.Equal(dueDate, loan.DueDate);
         Assert.Null(loan.ReturnedAt);

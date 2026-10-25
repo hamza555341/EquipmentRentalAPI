@@ -3,17 +3,12 @@ using EquipmentRental.Application.Common.Contracts;
 
 namespace EquipmentRental.UnitTests.Helpers;
 
-/// <summary>
-/// Repository وهمي شغال على List في الذاكرة.
-/// بيطبّق الـ predicate بجد (Compile) فالفلاتر اللي في الـ Handlers بتتختبر فعلًا،
-/// وده اللي Moq مش بيعمله.
-/// </summary>
+
 public class FakeRepository<TEntity> : IGenericRepository<TEntity>
     where TEntity : class
 {
     public List<TEntity> Items { get; } = new();
 
-    // بيحط الـ Entity في القائمة وبيدّيها Id تلقائي لو Id = 0 (زي SQL Identity)
     public TEntity Seed(TEntity entity)
     {
         if (GetId(entity) == 0)

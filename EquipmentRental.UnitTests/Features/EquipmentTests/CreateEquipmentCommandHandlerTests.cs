@@ -28,8 +28,8 @@ public class CreateEquipmentCommandHandlerTests
         var equipment = Assert.Single(_uow.Set<EquipmentEntity>().Items);
         Assert.Equal("Camera", equipment.Name);
         Assert.Equal("4K camera", equipment.Description);
-        Assert.Equal(EquipmentStatus.active, equipment.Status);   // الحالة الافتراضية Active
-        Assert.InRange(equipment.CreatedAt, before, after);       // CreatedAt بوقت UTC
+        Assert.Equal(EquipmentStatus.active, equipment.Status);   
+        Assert.InRange(equipment.CreatedAt, before, after);      
         Assert.Equal(1, _uow.SaveChangesCallCount);
     }
 }
